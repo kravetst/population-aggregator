@@ -1,0 +1,15 @@
+pycache/
+*.pyc
+*.pyo
+*.pyd
+venv/
+.env
+.idea/
+.vscode/
+.DS_Store
+data/
+postgres_data/
+dist/
+build/
+.alembic/
+alembic/versions/pycache/

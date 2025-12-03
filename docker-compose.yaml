@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./src:/app/src
+    working_dir: /app
+    command: ["python", "src/main.py"]
+
+  get_data:
+    extends:
+      service: app
+    command: ["python", "src/main.py", "get_data"]
+
+  print_data:
+    extends:
+      service: app
+    command: ["python", "src/main.py", "print_data"]
+
+volumes:
+  postgres_data:
