@@ -10,5 +10,7 @@ class Settings(BaseSettings):
     POSTGRES_HOST: str = "db"
     POSTGRES_PORT: int = 5432
 
+    DATA_SOURCE: str
+
 def get_settings():
     return Settings()
