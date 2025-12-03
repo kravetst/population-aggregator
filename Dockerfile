@@ -10,8 +10,8 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ./src ./src
-COPY .env.example .env.example
+COPY .env .env
 
 WORKDIR /app
 
-ENTRYPOINT ["python", "src/main.py"]
+CMD ["python", "src/main.py"]
